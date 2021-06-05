@@ -1,0 +1,47 @@
+-- User: SYSTEM
+
+-- Crear un usuario nuevo para el owner
+CREATE USER C##FUTURO IDENTIFIED BY 1234 DEFAULT TABLESPACE SYSAUX QUOTA 8M ON SYSAUX;
+
+-- Otorgar privilegios para CONECTAR y RECURSOS
+GRANT CONNECT, RESOURCE TO C##FUTURO;
+
+-- User: C##FUTURO
+
+-- Crear tabla CURSO
+CREATE TABLE CURSO
+(	sigla_curso VARCHAR2(10) NOT NULL CONSTRAINT PK_CURSO PRIMARY KEY,
+	descripcion VARCHAR2(25) NOT NULL
+);
+
+-- Crear tabla ASIGNATURA
+CREATE TABLE ASIGNATURA
+(	sigla_asignatura VARCHAR2(10) NOT NULL CONSTRAINT PK_ASIGNATURA PRIMARY KEY,
+	nombre 			 VARCHAR2(25) NOT NULL
+);
+
+-- Crear tabla ALUMNO
+CREATE TABLE ALUMNO
+(	numrut_alumno    NUMBER(10)   NOT NULL CONSTRAINT PK_ALUMNO PRIMARY KEY,
+	dvrut_alumno     VARCHAR2(1)  NOT NULL,
+	pnombre		     VARCHAR2(25) NOT NULL,
+	snombre 	     VARCHAR2(25),
+	appaterno  	     VARCHAR2(25) NOT NULL,
+	apmaterno 	     VARCHAR2(25) NOT NULL,
+	direccion 	     VARCHAR2(20) NOT NULL,
+	fono 	         NUMBER(10),
+	fecha_nacimiento DATE         NOT NULL,
+	sigla_curso  	 VARCHAR2(10) NOT NULL CONSTRAINT FK_ALUMNO_CURSO REFERENCES CURSO (sigla_curso)
+);
+
+-- Crear tabla NOTA_ALUMNO
+CREATE TABLE NOTA_ALUMNO
+(	numrut_alumno    NUMBER(10)   NOT NULL CONSTRAINT FK_NOTA_ALUMNO_ALUMNO     REFERENCES ALUMNO     (numrut_alumno),
+	sigla_asignatura VARCHAR2(10) NOT NULL CONSTRAINT FK_NOTA_ALUMNO_ASIGNATURA REFERENCES ASIGNATURA (sigla_asignatura),
+	nota1 NUMBER(2,1) NOT NULL,
+	nota2 NUMBER(2,1) NOT NULL,
+	nota3 NUMBER(2,1) NOT NULL,
+	nota4 NUMBER(2,1) NOT NULL,
+	nota5 NUMBER(2,1),
+	CONSTRAINT PK_NOTA_ALUMNO PRIMARY KEY (numrut_alumno, sigla_asignatura)
+);
