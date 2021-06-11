@@ -1,6 +1,6 @@
 -- User: SYSTEM
 
--- Crear el usuario para el owner
+-- Crear un usuario nuevo para el owner
 CREATE USER C##HAPPY_STUDENT IDENTIFIED BY 1234 DEFAULT TABLESPACE SYSAUX QUOTA 8M ON SYSAUX;
 
 -- Otorgar privilegios para CONECTAR y RECURSOS
