@@ -79,3 +79,35 @@ CREATE TABLE DETALLE_LENG(
 	NIVEL	NUMBER(1) NOT NULL,
 	CONSTRAINT LGJE_PROGRAMA_PK PRIMARY KEY (ID_POST, ID_LENG)
 );
+
+
+-- POBLADO DE INFORMACIÓN
+
+-- Poblado de estados civiles
+INSERT INTO estado_civil VALUES (1,'Soltero');
+
+INSERT INTO estado_civil VALUES (2,'Casado');
+
+INSERT INTO estado_civil VALUES (3,'Viudo');
+
+INSERT INTO estado_civil VALUES (4,'Divorciado');
+
+-- Poblado de regiones
+INSERT INTO region VALUES (5,'Metropolitana de Santiago');
+
+INSERT INTO region VALUES (10,'Antofagasta');
+
+INSERT INTO region VALUES (15,'Valparaiso');
+
+-- Poblado de ciudades (Necesarias para creación de comunas)
+INSERT INTO ciudad VALUES (1,5,'Santiago');
+
+INSERT INTO ciudad VALUES (2,15,'Valparaiso');
+
+-- Poblado de comunas
+INSERT INTO comuna VALUES (10,1,5,'Maipú');
+
+INSERT INTO comuna VALUES (20,1,5,'Cerrillos');
+
+-- DE MEMORIA A DISCO
+COMMIT;
